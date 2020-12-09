@@ -1,0 +1,36 @@
+﻿@model DiaryManagement.Models.Diary
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Diary</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.Username) :@Html.DisplayFor(model => model.User.Username)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)    : @Html.DisplayFor(model => model.Date)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Notes)   : @Html.DisplayFor(model => model.Notes)
+        </div>
+
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Image)
+    </div>
+    <div class="display-field">
+        @{var Image = Model.Image;}
+        <img src="@Url.Content(Model.Image)" alt="Image" height="150" width="150" />
+       
+ 
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiaryDatabaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DigitalDiaryDataContext" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Diarys" EntityType="DiaryDatabaseModel.Diary" />
+    <EntitySet Name="Users" EntityType="DiaryDatabaseModel.User" />
+    <AssociationSet Name="FK_Diarys_Users" Association="DiaryDatabaseModel.FK_Diarys_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Diarys" EntitySet="Diarys" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Diary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="DiaryDatabaseModel.FK_Diarys_Users" FromRole="Diarys" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Diarys" Relationship="DiaryDatabaseModel.FK_Diarys_Users" FromRole="Users" ToRole="Diarys" />
+  </EntityType>
+  <Association Name="FK_Diarys_Users">
+    <End Role="Users" Type="DiaryDatabaseModel.User" Multiplicity="1" />
+    <End Role="Diarys" Type="DiaryDatabaseModel.Diary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Diarys">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
