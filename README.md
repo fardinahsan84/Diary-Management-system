@@ -1,1 +1,1 @@
-# Diary-Management-system
+# Diary-Management-system(.Net)
